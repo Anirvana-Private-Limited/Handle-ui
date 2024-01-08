@@ -29,24 +29,12 @@ function EditCardsDialog({
   editCardsDialog,
   handleEditCardsDialogClose,
   handleEditCardsDialogOpen,
+  cardsItemArray,
+  setViewCardsItemArray,
 }) {
-  const [array1, setArray1] = useState([
-    { id: 1, title: "TOTAL NO OF LEADS", amount: 4, percentagetext: "+7" },
-    { id: 2, title: "TOTAL NO OF LEADS", amount: 3, percentagetext: "+7" },
-    { id: 3, title: "TOTAL NO OF LEADS", amount: 2, percentagetext: "+7" },
-    { id: 4, title: "TOTAL NO OF LEADS", amount: 8, percentagetext: "+7" },
-    { id: 5, title: "TOTAL NO OF LEADS", amount: 93, percentagetext: "+7" },
-    { id: 6, title: "TOTAL NO OF LEADS", amount: 87, percentagetext: "+7" },
-  ]);
+  const [array1, setArray1] = useState(cardsItemArray.splice(0, 9));
 
-  const [array2, setArray2] = useState([
-    { id: 7, title: "TOTAL NO OF LEADS", amount: 87, percentagetext: "+7" },
-    { id: 8, title: "TOTAL NO OF LEADS", amount: 98, percentagetext: "+7" },
-    { id: 9, title: "TOTAL NO OF LEADS", amount: 34, percentagetext: "+7" },
-    { id: 10, title: "TOTAL NO OF LEADS", amount: 88, percentagetext: "+7" },
-    { id: 11, title: "TOTAL NO OF LEADS", amount: 9, percentagetext: "+7" },
-    { id: 12, title: "TOTAL NO OF LEADS", amount: 44, percentagetext: "+7" },
-  ]);
+  const [array2, setArray2] = useState(cardsItemArray.splice(9));
 
   const handleAddCard = (element) => {
     const indexInArray2 = array2.findIndex((item) => item.id === element.id);

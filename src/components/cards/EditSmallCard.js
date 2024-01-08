@@ -11,28 +11,28 @@ import {
   Typography as MuiTypography,
 } from "@mui/material";
 import { spacing } from "@mui/system";
+
 const Typography = styled(MuiTypography)(spacing);
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles((theme) => ({
-  customCard: {
-    [theme.breakpoints.up("xs")]: {
-      width: "100%", // Full width on extra-small screens and larger
-    },
-    [theme.breakpoints.up("sm")]: {
-      width: "80%", // 80% width on small screens and larger
-    },
-    [theme.breakpoints.up("md")]: {
-      width: "60%", // 60% width on medium screens and larger
-    },
-    [theme.breakpoints.up("lg")]: {
-      width: "200px", // 50% width on large screens and larger
-    },
-    // Add more breakpoints and styles as needed
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   customCard: {
+//     [theme.breakpoints.up("xs")]: {
+//       width: "100%", // Full width on extra-small screens and larger
+//     },
+//     [theme.breakpoints.up("sm")]: {
+//       width: "80%", // 80% width on small screens and larger
+//     },
+//     [theme.breakpoints.up("md")]: {
+//       width: "60%", // 60% width on medium screens and larger
+//     },
+//     [theme.breakpoints.up("lg")]: {
+//       width: "200px", // 50% width on large screens and larger
+//     },
+//     // Add more breakpoints and styles as needed
+//   },
+// }));
 
 const illustrationCardStyle = (props) => css`
   ${props.illustration &&
@@ -84,13 +84,13 @@ const EditSmallCard = ({
   percentagecolor,
   illustration,
 }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <Card
       illustration={illustration}
       variant="outlined"
-      className={classes.customCard}
+      // className={classes.customCard}
     >
       <CardContent>
         <Grid container justifyContent={"space-between"}>

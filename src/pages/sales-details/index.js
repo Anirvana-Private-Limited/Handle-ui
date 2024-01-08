@@ -86,6 +86,40 @@ const SalesDetails = () => {
   const [shareSearchDialog, setShareSearchDialog] = useState(false);
   const [addNewLeadDialog, setAddNewLeadDialog] = useState(false);
   const [editCardsDialog, setEditCardsDialog] = useState(false);
+  const [cardsItemArray, setCardsItemArray] = useState([
+    { id: 1, title: "TOTAL NO OF LEADS", amount: 4, percentagetext: "+7" },
+    { id: 2, title: "TOTAL NO OF LEADS", amount: 3, percentagetext: "+7" },
+    { id: 3, title: "TOTAL NO OF LEADS", amount: 2, percentagetext: "+7" },
+    { id: 4, title: "TOTAL NO OF LEADS", amount: 8, percentagetext: "+7" },
+    { id: 5, title: "TOTAL NO OF LEADS", amount: 93, percentagetext: "+7" },
+    { id: 6, title: "TOTAL NO OF LEADS", amount: 11, percentagetext: "+7" },
+    { id: 7, title: "TOTAL NO OF LEADS", amount: 87, percentagetext: "+7" },
+    { id: 8, title: "TOTAL NO OF LEADS", amount: 34, percentagetext: "+7" },
+    { id: 9, title: "TOTAL NO OF LEADS", amount: 65, percentagetext: "+7" },
+    { id: 10, title: "TOTAL NO OF LEADS", amount: 7, percentagetext: "+7" },
+    { id: 11, title: "TOTAL NO OF LEADS", amount: 37, percentagetext: "+7" },
+    { id: 12, title: "TOTAL NO OF LEADS", amount: 77, percentagetext: "+7" },
+    { id: 13, title: "TOTAL NO OF LEADS", amount: 67, percentagetext: "+7" },
+    { id: 14, title: "TOTAL NO OF LEADS", amount: 57, percentagetext: "+7" },
+    { id: 15, title: "TOTAL NO OF LEADS", amount: 47, percentagetext: "+7" },
+    { id: 16, title: "TOTAL NO OF LEADS", amount: 0, percentagetext: "+7" },
+    { id: 17, title: "TOTAL NO OF LEADS", amount: 21, percentagetext: "+7" },
+    { id: 18, title: "TOTAL NO OF LEADS", amount: 98, percentagetext: "+7" },
+    { id: 19, title: "TOTAL NO OF LEADS", amount: 76, percentagetext: "+7" },
+    { id: 20, title: "TOTAL NO OF LEADS", amount: 33, percentagetext: "+7" },
+  ]);
+
+  const [viewCardsItemArray, setViewCardsItemArray] = useState([
+    { id: 1, title: "TOTAL NO OF LEADS", amount: 4, percentagetext: "+7" },
+    { id: 2, title: "TOTAL NO OF LEADS", amount: 3, percentagetext: "+7" },
+    { id: 3, title: "TOTAL NO OF LEADS", amount: 2, percentagetext: "+7" },
+    { id: 4, title: "TOTAL NO OF LEADS", amount: 8, percentagetext: "+7" },
+    { id: 5, title: "TOTAL NO OF LEADS", amount: 93, percentagetext: "+7" },
+    { id: 6, title: "TOTAL NO OF LEADS", amount: 11, percentagetext: "+7" },
+    { id: 7, title: "TOTAL NO OF LEADS", amount: 87, percentagetext: "+7" },
+    { id: 8, title: "TOTAL NO OF LEADS", amount: 34, percentagetext: "+7" },
+    { id: 9, title: "TOTAL NO OF LEADS", amount: 65, percentagetext: "+7" },
+  ]);
 
   const [pinOpen, setPinOpen] = React.useState(false);
 
@@ -155,6 +189,8 @@ const SalesDetails = () => {
           editCardsDialog={editCardsDialog}
           handleEditCardsDialogClose={handleEditCardsDialogClose}
           handleEditCardsDialogOpen={handleEditCardsDialogOpen}
+          cardsItemArray={cardsItemArray}
+          setViewCardsItemArray={setViewCardsItemArray}
         />
 
         {/* This dialog box is for saving the search */}
@@ -831,81 +867,29 @@ const SalesDetails = () => {
               <EditIcon color="primary" />
             </IconButton>
             <Grid container item xs={6} spacing={1}>
-              <Grid item xs={12} sm={12} md={6} lg={3} xl>
-                <BigCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={red[500]}
-                />
-              </Grid>
-              <Grid item xs={12} sm={12} md={6} lg={3} xl>
-                <BigCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={red[500]}
-                />
-              </Grid>
-              <Grid item xs={12} sm={12} md={6} lg={3} xl>
-                <BigCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={green[500]}
-                />
-              </Grid>
+              {viewCardsItemArray.slice(0, 3).map((item, index) => (
+                <Grid item xs={12} sm={12} md={6} lg={4} xl key={index}>
+                  <BigCard
+                    title={item.title}
+                    amount={item.amount}
+                    percentagetext={item.percentagetext}
+                    percentagecolor={red[500]}
+                  />
+                </Grid>
+              ))}
             </Grid>
 
             <Grid container item xs={6} spacing={1}>
-              <Grid item>
-                <SmallCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={green[500]}
-                />
-              </Grid>
-              <Grid item>
-                <SmallCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={green[500]}
-                />
-              </Grid>
-              <Grid item>
-                <SmallCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={green[500]}
-                />
-              </Grid>
-              <Grid item>
-                <SmallCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={red[500]}
-                />
-              </Grid>
-              <Grid item>
-                <SmallCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={green[500]}
-                />
-              </Grid>
-              <Grid item>
-                <SmallCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  percentagecolor={red[500]}
-                />
-              </Grid>
+              {viewCardsItemArray.slice(3, 9).map((item, index) => (
+                <Grid item xs={4} key={index}>
+                  <SmallCard
+                    title={item.title}
+                    amount={item.amount}
+                    percentagetext={item.percentagetext}
+                    percentagecolor={green[500]}
+                  />
+                </Grid>
+              ))}
             </Grid>
           </Grid>
         </Grid>
