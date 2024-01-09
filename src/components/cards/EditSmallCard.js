@@ -9,6 +9,8 @@ import {
   Card as MuiCard,
   CardContent as MuiCardContent,
   Typography as MuiTypography,
+  CardActions,
+  IconButton,
 } from "@mui/material";
 import { spacing } from "@mui/system";
 
@@ -78,13 +80,14 @@ const Percentage = styled(MuiTypography)`
 `;
 
 const EditSmallCard = ({
-  title,
-  amount,
-  percentagetext,
   percentagecolor,
   illustration,
+  data,
+  addTypeButton,
+  handleCardAction,
 }) => {
   // const classes = useStyles();
+  const { title, amount, percentagetext } = data;
 
   return (
     <Card
@@ -92,6 +95,29 @@ const EditSmallCard = ({
       variant="outlined"
       // className={classes.customCard}
     >
+      <CardActions
+        disableSpacing
+        sx={{
+          alignSelf: "stretch",
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "flex-start",
+          position: "absolute",
+          // 👇 Edit padding to further adjust position
+          p: 0,
+          zIndex: 100,
+          right: 0,
+        }}
+      >
+        <IconButton onClick={() => handleCardAction({ ...data })}>
+          {addTypeButton ? (
+            <AddCircleOutlineIcon color="primary" />
+          ) : (
+            <RemoveCircleOutlineIcon color="primary" />
+          )}
+        </IconButton>
+        {/* <Checkbox size="small" color="primary"></Checkbox> */}
+      </CardActions>
       <CardContent>
         <Grid container justifyContent={"space-between"}>
           <Grid item>
@@ -99,19 +125,20 @@ const EditSmallCard = ({
               <Box fontWeight="fontWeightRegular">{amount}</Box>
             </Typography>
           </Grid>
-          <Grid item>
-            <Percentage
-              variant="body2"
-              color="textSecondary"
-              percentagecolor={percentagecolor}
-              illustration={illustration}
-              //   mb={4}
-            >
-              <span>{percentagetext}</span>
-            </Percentage>
-          </Grid>
+          <Grid item></Grid>
         </Grid>
-        <Typography variant="body2">{title}</Typography>
+        <Typography variant="body2">
+          {title}
+          <Percentage
+            variant="span"
+            color="textSecondary"
+            percentagecolor={percentagecolor}
+            illustration={illustration}
+            ml={4}
+          >
+            <span>{percentagetext}%</span>
+          </Percentage>
+        </Typography>
       </CardContent>
     </Card>
   );

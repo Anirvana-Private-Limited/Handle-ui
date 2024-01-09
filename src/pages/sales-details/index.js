@@ -107,6 +107,7 @@ const SalesDetails = () => {
     { id: 18, title: "TOTAL NO OF LEADS", amount: 98, percentagetext: "+7" },
     { id: 19, title: "TOTAL NO OF LEADS", amount: 76, percentagetext: "+7" },
     { id: 20, title: "TOTAL NO OF LEADS", amount: 33, percentagetext: "+7" },
+    { id: 21, title: "TOTAL NO OF LEADS", amount: 45, percentagetext: "+7" },
   ]);
 
   const [viewCardsItemArray, setViewCardsItemArray] = useState([
@@ -189,8 +190,8 @@ const SalesDetails = () => {
           editCardsDialog={editCardsDialog}
           handleEditCardsDialogClose={handleEditCardsDialogClose}
           handleEditCardsDialogOpen={handleEditCardsDialogOpen}
-          cardsItemArray={cardsItemArray}
           setViewCardsItemArray={setViewCardsItemArray}
+          cardsItemArray={cardsItemArray}
         />
 
         {/* This dialog box is for saving the search */}
@@ -534,9 +535,6 @@ const SalesDetails = () => {
                   <MenuItem value={""} disabled>
                     Status
                   </MenuItem>
-                  {/* <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-                <MenuItem value="other">Other</MenuItem> */}
                 </Select>
               </Grid>
             </Grid>

@@ -81,7 +81,7 @@ const SmallCard = ({
               illustration={illustration}
               //   mb={4}
             >
-              <span>{percentagetext}</span>
+              <span>{percentagetext}%</span>
             </Percentage>
           </Grid>
         </Grid>
