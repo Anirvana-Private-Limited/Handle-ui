@@ -9,16 +9,10 @@ import {
   Select,
   MenuItem,
   TextField,
-  Box,
-  Menu,
   Divider,
   Tooltip,
   Snackbar,
   Collapse,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  DialogContent,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { green, red } from "@mui/material/colors";
@@ -28,43 +22,17 @@ import RedoOutlinedIcon from "@mui/icons-material/RedoOutlined";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
-import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import { PushPin } from "@mui/icons-material";
 import MuiAlert from "@mui/material/Alert";
 import { DatePicker } from "@mui/x-date-pickers";
-import { styled } from "@mui/material/styles";
 import AuthGuard from "../../components/guards/AuthGuard";
-import Table from "../../components/tables/MaterialTable";
 import { BigCard, SmallCard } from "../../components/cards";
+import ReactMaterialTable from "../../components/tables/ReactMaterialTable";
 import EditCardsDialog from "../../components/Dialogs/EditCardsDialog";
-
-const SaveSearchDialogContainer = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-}));
-
-const ShareSearchDialogContainer = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-}));
-
-const AddNewLeadDialogContainer = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-}));
+import SaveSearchDialog from "../../components/Dialogs/SaveSearchDialog";
+import ShareSearchDialog from "../../components/Dialogs/ShareSearchDialog";
+import AddNewLeadDialog from "../../components/Dialogs/AddNewLeadDialog";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -172,7 +140,7 @@ const SalesDetails = () => {
         {/* This is for Pinning Search */}
         <Snackbar
           open={pinOpen}
-          autoHideDuration={6000}
+          autoHideDuration={5000}
           onClose={handlePinClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
@@ -195,363 +163,23 @@ const SalesDetails = () => {
         />
 
         {/* This dialog box is for saving the search */}
-        <SaveSearchDialogContainer
-          // onClose={handleSaveSearchDialogClose}
-          aria-labelledby="customized-dialog-title"
-          open={saveSearchDialog}
-          maxWidth="sm"
-          fullWidth
-        >
-          <Grid
-            container
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
-            <Grid item>
-              <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-                SAVE THIS SEARCH
-              </DialogTitle>
-            </Grid>
-            <Grid item>
-              <IconButton onClick={handleShareSearchDialogOpen}>
-                <RedoOutlinedIcon color="primary" />
-              </IconButton>
-
-              <IconButton
-                aria-label="close"
-                onClick={handleSaveSearchDialogClose}
-                sx={{
-                  color: (theme) => theme.palette.grey[500],
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-          <DialogContent dividers>
-            <Grid p={4}>
-              <TextField fullWidth size="small" placeholder="Title" />
-            </Grid>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleSaveSearchDialogClose}>
-              Cancel
-            </Button>
-            <Button
-              autoFocus
-              onClick={handleSaveSearchDialogClose}
-              variant="outlined"
-            >
-              Save
-            </Button>
-          </DialogActions>
-        </SaveSearchDialogContainer>
+        <SaveSearchDialog
+          saveSearchDialog={saveSearchDialog}
+          handleShareSearchDialogOpen={handleShareSearchDialogOpen}
+          handleSaveSearchDialogClose={handleSaveSearchDialogClose}
+        />
 
         {/* This dialog box is for share search */}
-        <ShareSearchDialogContainer
-          // onClose={handleShareSearchDialogClose}
-          aria-labelledby="customized-dialog-title"
-          open={shareSearchDialog}
-          maxWidth="sm"
-          fullWidth
-        >
-          <Grid
-            container
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
-            <Grid item>
-              <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-                SHARE SEARCH
-              </DialogTitle>
-            </Grid>
-            <Grid item>
-              <IconButton
-                aria-label="close"
-                onClick={handleShareSearchDialogClose}
-                sx={{
-                  color: (theme) => theme.palette.grey[500],
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-          <DialogContent dividers>
-            <Grid p={4}>
-              <Select
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                displayEmpty
-                fullWidth
-                size="small"
-              >
-                <MenuItem value={""}>Current Search</MenuItem>
-                <MenuItem>Current Search 1</MenuItem>
-              </Select>
-            </Grid>
-            <Grid p={4}>
-              <TextField fullWidth size="small" placeholder="Title" />
-            </Grid>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleShareSearchDialogClose}>
-              Cancel
-            </Button>
-            <Button
-              autoFocus
-              onClick={handleShareSearchDialogClose}
-              variant="outlined"
-            >
-              Save
-            </Button>
-          </DialogActions>
-        </ShareSearchDialogContainer>
+        <ShareSearchDialog
+          shareSearchDialog={shareSearchDialog}
+          handleShareSearchDialogClose={handleShareSearchDialogClose}
+        />
 
         {/* This dialog box is for add new lead form */}
-        <AddNewLeadDialogContainer
-          // onClose={handleAddNewLeadDialogClose}
-          aria-labelledby="customized-dialog-title"
-          open={addNewLeadDialog}
-          maxWidth="md"
-          fullWidth
-        >
-          <Grid
-            container
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
-            <Grid item>
-              <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-                ADD NEW LEAD
-              </DialogTitle>
-            </Grid>
-            <Grid item>
-              <IconButton
-                aria-label="close"
-                onClick={handleAddNewLeadDialogClose}
-                sx={{
-                  color: (theme) => theme.palette.grey[500],
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-          <DialogContent dividers>
-            <Grid p={4} container spacing={4} mb={4}>
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  fullWidth
-                  placeholder="Name of the Student"
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <DatePicker
-                  label="Date of Birth"
-                  slotProps={{
-                    textField: {
-                      size: "small",
-                      format: "dd/MM/yyyy",
-                      fullWidth: true,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  fullWidth
-                  placeholder="Contact"
-                  name="contact"
-                  type="tel"
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  fullWidth
-                  placeholder="Email"
-                  name="email"
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  fullWidth
-                  placeholder="Address Line 1"
-                  name="address"
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  fullWidth
-                  placeholder="Address Line 2"
-                  name="address"
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <Select
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  displayEmpty
-                  fullWidth
-                  style={{
-                    color: city === "" && placeholderColor,
-                  }}
-                  size="small"
-                >
-                  <MenuItem value={""} disabled>
-                    City
-                  </MenuItem>
-                  <MenuItem>City 1</MenuItem>
-                </Select>
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  fullWidth
-                  placeholder="Pincode"
-                  name="pincode"
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <Select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  displayEmpty
-                  fullWidth
-                  style={{
-                    color: gender === "" && placeholderColor,
-                  }}
-                  size="small"
-                >
-                  <MenuItem value={""} disabled>
-                    Gender
-                  </MenuItem>
-                  <MenuItem value="male">Male</MenuItem>
-                  <MenuItem value="female">Female</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
-                </Select>
-              </Grid>
-            </Grid>
-            <Grid p={4} container spacing={4} mb={4}>
-              <Grid item xs={4}>
-                <DatePicker
-                  label="Lead Generation Date"
-                  slotProps={{
-                    textField: {
-                      size: "small",
-                      format: "dd/MM/yyyy",
-                      fullWidth: true,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <Select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  displayEmpty
-                  fullWidth
-                  style={{
-                    color: gender === "" && placeholderColor,
-                  }}
-                  size="small"
-                >
-                  <MenuItem value={""} disabled>
-                    Course
-                  </MenuItem>
-                  {/* <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-                <MenuItem value="other">Other</MenuItem> */}
-                </Select>
-              </Grid>
-              <Grid item xs={4}>
-                <Select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  displayEmpty
-                  fullWidth
-                  style={{
-                    color: gender === "" && placeholderColor,
-                  }}
-                  size="small"
-                >
-                  <MenuItem value={""} disabled>
-                    Platform
-                  </MenuItem>
-                  {/* <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-                <MenuItem value="other">Other</MenuItem> */}
-                </Select>
-              </Grid>
-            </Grid>
-
-            <Grid p={4} container spacing={4} mb={4}>
-              <Grid item xs={4}>
-                <DatePicker
-                  label="Call Back Date"
-                  slotProps={{
-                    textField: {
-                      size: "small",
-                      format: "dd/MM/yyyy",
-                      fullWidth: true,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <DatePicker
-                  label="Appointment Date"
-                  slotProps={{
-                    textField: {
-                      size: "small",
-                      format: "dd/MM/yyyy",
-                      fullWidth: true,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField size="small" fullWidth placeholder="Visitor Name" />
-              </Grid>
-              <Grid item xs={8}>
-                <TextField size="small" fullWidth placeholder="Notes" />
-              </Grid>
-              <Grid item xs={4}>
-                <Select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  displayEmpty
-                  fullWidth
-                  style={{
-                    color: gender === "" && placeholderColor,
-                  }}
-                  size="small"
-                >
-                  <MenuItem value={""} disabled>
-                    Status
-                  </MenuItem>
-                </Select>
-              </Grid>
-            </Grid>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleAddNewLeadDialogClose}>
-              Cancel
-            </Button>
-            <Button
-              autoFocus
-              onClick={handleAddNewLeadDialogClose}
-              variant="outlined"
-            >
-              Save
-            </Button>
-          </DialogActions>
-        </AddNewLeadDialogContainer>
+        <AddNewLeadDialog
+          addNewLeadDialog={addNewLeadDialog}
+          handleAddNewLeadDialogClose={handleAddNewLeadDialogClose}
+        />
 
         {/* First Row */}
         <Grid container justifyContent={"space-between"} mb={6}>
@@ -627,8 +255,8 @@ const SalesDetails = () => {
             </Grid>
           </Grid>
 
-          <Grid container spacing={4} mb={2}>
-            <Grid container item xs={4.5} spacing={2}>
+          <Grid container spacing={3} mb={2}>
+            <Grid container item xs={4} spacing={1}>
               <Grid item xs={2.8}>
                 <Button variant="outlined" size="medium" fullWidth>
                   PENDING
@@ -657,15 +285,21 @@ const SalesDetails = () => {
                 views={["month", "year"]}
                 slotProps={{ textField: { size: "small" } }}
                 fullWidth
+                onChange={(date) =>
+                  console.log(date.toLocaleDateString("en-GB"))
+                }
               />
             </Grid>
-            <Grid item xs={3.2} container spacing={4}>
+            <Grid item xs={3.2} container spacing={1}>
               <Grid item xs={6}>
                 <DatePicker
                   label="Start Date"
                   slotProps={{
                     textField: { size: "small", format: "dd/MM/yyyy" },
                   }}
+                  onChange={(date) =>
+                    console.log(date.toLocaleDateString("en-GB"))
+                  }
                 />
               </Grid>
               <Grid item xs={6}>
@@ -674,11 +308,14 @@ const SalesDetails = () => {
                   slotProps={{
                     textField: { size: "small", format: "dd/MM/yyyy" },
                   }}
+                  onChange={(date) =>
+                    console.log(date.toLocaleDateString("en-GB"))
+                  }
                 />
               </Grid>
             </Grid>
 
-            <Grid container item xs={2.5} justifyContent={"space-between"}>
+            <Grid container item xs={3}>
               <Grid item>
                 <IconButton aria-label="Forward">
                   <FormatListNumberedIcon />
@@ -895,7 +532,8 @@ const SalesDetails = () => {
         {/* Fourth Row Table */}
         <Grid style={{ backgroundColor: "#fff" }} borderRadius={2} mb={6}>
           <Grid>
-            <Table />
+            <ReactMaterialTable />
+            {/* <Example /> */}
           </Grid>
         </Grid>
       </Container>
