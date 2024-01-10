@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Button,
@@ -32,9 +32,9 @@ function EditCardsDialog({
   cardsItemArray,
   setViewCardsItemArray,
 }) {
-  const [array1, setArray1] = useState(cardsItemArray.splice(0, 9));
+  const [array1, setArray1] = useState(cardsItemArray.slice(0, 9));
 
-  const [array2, setArray2] = useState(cardsItemArray.splice(9));
+  const [array2, setArray2] = useState(cardsItemArray.slice(9));
 
   const handleAddCard = (element) => {
     const indexInArray2 = array2.findIndex((item) => item.id === element.id);
@@ -63,6 +63,10 @@ function EditCardsDialog({
       setArray2((prevArray2) => [...prevArray2, element]);
     }
   };
+
+  useEffect(() => {
+    setViewCardsItemArray(array1);
+  }, [array1]);
 
   return (
     <SaveSearchDialogContainer
@@ -93,24 +97,44 @@ function EditCardsDialog({
       <DialogContent dividers>
         <Grid p={4}>
           {/* this is for substract */}
-          <Grid container spacing={1}>
-            {array1.map((data) => (
-              <Grid item xs={2} key={data.id}>
-                <EditBigCard
-                  title="TOTAL NO OF LEADS"
-                  amount="43"
-                  percentagetext="-7%"
-                  data={data}
-                  percentagecolor={red[500]}
-                  addTypeButton={false}
-                  handleCardAction={handleSubtractCard}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          <Grid container spacing={1} marginBottom={2}>
+            <Grid container spacing={1} item xs={6}>
+              {array1.slice(0, 3).map((data) => (
+                <Grid item xs={4} key={data.id}>
+                  <EditBigCard
+                    title="TOTAL NO OF LEADS"
+                    amount="43"
+                    percentagetext="-7"
+                    data={data}
+                    percentagecolor={red[500]}
+                    addTypeButton={false}
+                    handleCardAction={handleSubtractCard}
+                  />
+                </Grid>
+              ))}
+            </Grid>
 
+            <Grid container spacing={1} item xs={6}>
+              {array1.slice(3).map((data) => (
+                <Grid item xs={4} key={data.id}>
+                  <EditSmallCard
+                    title="TOTAL NO OF LEADS"
+                    amount="43"
+                    percentagetext="-7"
+                    data={data}
+                    percentagecolor={red[500]}
+                    addTypeButton={false}
+                    handleCardAction={handleSubtractCard}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
           {/* This is for adding */}
-          <Grid container spacing={1}>
+
+          <Divider />
+
+          <Grid container spacing={1} marginTop={2}>
             {array2.map((data) => (
               <Grid item xs={2} key={data.id}>
                 <EditBigCard
