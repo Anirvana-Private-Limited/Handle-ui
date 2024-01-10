@@ -3,6 +3,8 @@ import {
   MaterialReactTable,
   useMaterialReactTable,
   createMRTColumnHelper,
+  MRT_ShowHideColumnsButton,
+  MRT_ToggleFullScreenButton,
 } from "material-react-table";
 import {
   Box,
@@ -143,6 +145,7 @@ const LeadsTable = () => {
     enableFullScreenToggle: false,
     enableDensityToggle: false,
     enableRowNumbers: false,
+    positionGlobalFilter: "left",
     defaultDisplayColumn: {
       enableResizing: true, //turn on some features that are usually off for all display columns
     },
