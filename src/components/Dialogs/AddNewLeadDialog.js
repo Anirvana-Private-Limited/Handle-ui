@@ -15,6 +15,13 @@ import { DatePicker } from "@mui/x-date-pickers";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
+import {
+  fetchCityList,
+  fetchCourseList,
+  fetchPlatformList,
+  getUserData,
+  formateDate,
+} from "../../service/services";
 
 const AddNewLeadDialogContainer = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -32,9 +39,53 @@ const AddNewLeadDialog = ({
   const theme = useTheme();
 
   const placeholderColor = theme.palette.text.secondary;
-
+  const [cityList, setCityList] = useState([]);
   const [city, setCity] = useState("");
+  const [genderList, setGenderList] = useState([]);
   const [gender, setGender] = useState("");
+  const [courseList, setCourseList] = useState([]);
+  const [course, setCourse] = useState("");
+  const [platformList, setPlatformList] = useState([]);
+  const [platform, setPlatform] = useState("");
+  const [statusList, setStatusList] = useState([]);
+  const [status, setStatus] = useState("");
+  const [formData, setFormData] = useState({
+    branch: "1",
+    date: "2010-12-12",
+    phone_1: "8787878798",
+    address_1: "panjagutta Hydrabad",
+    pin_code: "500036",
+    city: "Hydrabad",
+    name: "Adit Atreya",
+    gender: "",
+    notes: "test",
+    call_back: "2010-11-12",
+    dob: "",
+    address: {
+      address_line_1: "road number 36",
+      address_line_2: "Hyd",
+      city: 1,
+      pincode: 500036,
+    },
+    course: 1,
+    platform: 1,
+    email: "aditatreya@gmail.com",
+  });
+
+  useEffect(() => {
+    const getData = async () => {
+      const cities = await fetchCityList();
+      setCityList(cities);
+      const courses = await fetchCourseList();
+      setCourseList(courses);
+      const platforms = await fetchPlatformList();
+      setPlatformList(platforms);
+    };
+
+    getData();
+  }, []);
+
+  const handleAddLead = async () => {};
 
   return (
     <AddNewLeadDialogContainer
@@ -63,7 +114,7 @@ const AddNewLeadDialog = ({
         </Grid>
       </Grid>
       <DialogContent dividers>
-        <Grid p={4} container spacing={4} mb={4}>
+        <Grid p={4} container spacing={4} mb={4} mt={2}>
           <Grid item xs={4}>
             <TextField
               size="small"
@@ -81,6 +132,7 @@ const AddNewLeadDialog = ({
                   fullWidth: true,
                 },
               }}
+              onChange={(date) => console.log(date.toLocaleDateString("en-GB"))}
             />
           </Grid>
           <Grid item xs={4}>
@@ -130,7 +182,11 @@ const AddNewLeadDialog = ({
               <MenuItem value={""} disabled>
                 City
               </MenuItem>
-              <MenuItem>City 1</MenuItem>
+              {cityList.map((city) => (
+                <MenuItem key={city.id} value={city.name}>
+                  {city.name}
+                </MenuItem>
+              ))}
             </Select>
           </Grid>
           <Grid item xs={4}>
@@ -155,9 +211,11 @@ const AddNewLeadDialog = ({
               <MenuItem value={""} disabled>
                 Gender
               </MenuItem>
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
+              {genderList.map((gender) => (
+                <MenuItem key={gender} value={gender}>
+                  {gender}
+                </MenuItem>
+              ))}
             </Select>
           </Grid>
         </Grid>
@@ -176,40 +234,44 @@ const AddNewLeadDialog = ({
           </Grid>
           <Grid item xs={4}>
             <Select
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
+              value={course}
+              onChange={(e) => setCourse(e.target.value)}
               displayEmpty
               fullWidth
               style={{
-                color: gender === "" && placeholderColor,
+                color: course === "" && placeholderColor,
               }}
               size="small"
             >
               <MenuItem value={""} disabled>
                 Course
               </MenuItem>
-              {/* <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-                <MenuItem value="other">Other</MenuItem> */}
+              {courseList.map((course) => (
+                <MenuItem key={course.id} value={course.name}>
+                  {course.name}
+                </MenuItem>
+              ))}
             </Select>
           </Grid>
           <Grid item xs={4}>
             <Select
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
+              value={platform}
+              onChange={(e) => setPlatform(e.target.value)}
               displayEmpty
               fullWidth
               style={{
-                color: gender === "" && placeholderColor,
+                color: platform === "" && placeholderColor,
               }}
               size="small"
             >
               <MenuItem value={""} disabled>
                 Platform
               </MenuItem>
-              {/* <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-                <MenuItem value="other">Other</MenuItem> */}
+              {platformList.map((platform) => (
+                <MenuItem key={platform.id} value={platform.name}>
+                  {platform.name}
+                </MenuItem>
+              ))}
             </Select>
           </Grid>
         </Grid>
@@ -247,18 +309,23 @@ const AddNewLeadDialog = ({
           </Grid>
           <Grid item xs={4}>
             <Select
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
               displayEmpty
               fullWidth
               style={{
-                color: gender === "" && placeholderColor,
+                color: status === "" && placeholderColor,
               }}
               size="small"
             >
               <MenuItem value={""} disabled>
                 Status
               </MenuItem>
+              {statusList.map((status) => (
+                <MenuItem key={status} value={status}>
+                  {status}
+                </MenuItem>
+              ))}
             </Select>
           </Grid>
         </Grid>
