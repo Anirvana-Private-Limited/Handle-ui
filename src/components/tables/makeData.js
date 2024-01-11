@@ -9,7 +9,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 2,
@@ -21,7 +20,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 3,
@@ -33,7 +31,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 4,
@@ -45,7 +42,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 5,
@@ -57,7 +53,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 6,
@@ -69,7 +64,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 7,
@@ -81,7 +75,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 8,
@@ -93,7 +86,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 9,
@@ -105,7 +97,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 10,
@@ -117,7 +108,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 11,
@@ -129,7 +119,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 12,
@@ -141,7 +130,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 13,
@@ -153,7 +141,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 14,
@@ -165,7 +152,6 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
   {
     sno: 15,
@@ -177,6 +163,5 @@ export const data1 = [
     area: "Mirzapur",
     platform: "Instagram",
     callbackdate: "21/12/2023",
-    actions: "these are the actions",
   },
 ];

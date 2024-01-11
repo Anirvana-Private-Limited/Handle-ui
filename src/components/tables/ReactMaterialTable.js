@@ -3,12 +3,25 @@ import {
   MaterialReactTable,
   useMaterialReactTable,
   createMRTColumnHelper,
+  MRT_ShowHideColumnsButton,
+  MRT_ToggleFullScreenButton,
 } from "material-react-table";
-import { Box, IconButton, Menu, MenuItem, Select, Button } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Select,
+  Tooltip,
+} from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 import { jsPDF } from "jspdf"; //or use your library of choice here
 import autoTable from "jspdf-autotable";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { data1 } from "./makeData";
 
 const columnHelper = createMRTColumnHelper();
@@ -38,9 +51,6 @@ const columns = [
   columnHelper.accessor("callbackdate", {
     header: "Call Back Date",
   }),
-  columnHelper.accessor("actions", {
-    header: "Actions",
-  }),
 ];
 
 const csvConfig = mkConfig({
@@ -65,6 +75,10 @@ const LeadsTable = () => {
         header: "ID",
       },
       {
+        accessorKey: "name",
+        header: "Name",
+      },
+      {
         accessorKey: "phone",
         header: "Phone",
       },
@@ -83,10 +97,6 @@ const LeadsTable = () => {
       {
         accessorKey: "callbackdate",
         header: "Call Back Date",
-      },
-      {
-        accessorKey: "actions",
-        header: "Actions",
       },
     ],
     []
@@ -107,7 +117,7 @@ const LeadsTable = () => {
   const handleExportPDFRows = (rows) => {
     const doc = new jsPDF();
     const tableData = rows.map((row) => Object.values(row.original));
-    const tableHeaders = columns.map((c) => c.header);
+    const tableHeaders = columns1.map((c) => c.header);
 
     autoTable(doc, {
       head: [tableHeaders],
@@ -127,20 +137,21 @@ const LeadsTable = () => {
   };
 
   const table = useMaterialReactTable({
-    columns,
+    columns: columns1,
     data: data1,
-    enableRowSelection: true,
+    // enableRowSelection: true,
     paginationDisplayMode: "pages",
     positionToolbarAlertBanner: "bottom",
-    // enableGlobalFilterModes: false,
     enableFullScreenToggle: false,
     enableDensityToggle: false,
+    enableRowNumbers: false,
+    positionGlobalFilter: "left",
     defaultDisplayColumn: {
       enableResizing: true, //turn on some features that are usually off for all display columns
     },
     displayColumnDefOptions: {
       "mrt-row-actions": {
-        size: 350, //set custom width
+        size: 210, //set custom width
         muiTableHeadCellProps: {
           align: "center", //change head cell props
         },
@@ -163,14 +174,31 @@ const LeadsTable = () => {
     },
     enableColumnResizing: true,
     enableColumnOrdering: true,
-    enableRowNumbers: true,
     enableRowSelection: true,
     enableRowActions: true,
+    positionActionsColumn: "last",
     renderRowActions: ({ row }) => (
       <Box sx={{ display: "flex", gap: "1rem" }}>
-        <Button>Button 1</Button>
-        <Button>Button 2</Button>
-        <Button>Button 3</Button>
+        <Tooltip title="Edit">
+          <IconButton>
+            <EditIcon color="primary" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="View">
+          <IconButton>
+            <VisibilityIcon color="primary" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Delete">
+          <IconButton>
+            <DeleteIcon color="primary" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Appointment">
+          <IconButton>
+            <AccountBoxIcon color="primary" />
+          </IconButton>
+        </Tooltip>
       </Box>
     ),
 
