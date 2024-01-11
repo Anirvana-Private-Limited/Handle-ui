@@ -3,8 +3,6 @@ import {
   MaterialReactTable,
   useMaterialReactTable,
   createMRTColumnHelper,
-  MRT_ShowHideColumnsButton,
-  MRT_ToggleFullScreenButton,
 } from "material-react-table";
 import {
   Box,
@@ -13,6 +11,7 @@ import {
   MenuItem,
   Select,
   Tooltip,
+  Grid,
 } from "@mui/material";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { mkConfig, generateCsv, download } from "export-to-csv";
@@ -65,38 +64,47 @@ const LeadsTable = () => {
       {
         accessorKey: "sno",
         header: "S.No.",
+        size: 0,
       },
       {
         accessorKey: "date",
         header: "Date",
+        size: 0,
       },
       {
         accessorKey: "id",
         header: "ID",
+        size: 0,
       },
       {
         accessorKey: "name",
         header: "Name",
+        size: 0,
       },
       {
         accessorKey: "phone",
         header: "Phone",
+        size: 0,
       },
       {
         accessorKey: "course",
         header: "Course",
+        size: 0,
       },
       {
         accessorKey: "area",
         header: "Area",
+        size: 0,
       },
       {
         accessorKey: "platform",
         header: "Platform",
+        size: 0,
       },
       {
         accessorKey: "callbackdate",
         header: "Call Back Date",
+        size: 0,
       },
     ],
     []
@@ -145,40 +153,35 @@ const LeadsTable = () => {
     enableFullScreenToggle: false,
     enableDensityToggle: false,
     enableRowNumbers: false,
-    positionGlobalFilter: "left",
+    enableColumnDragging: false,
+    enableColumnActions: false,
+    enableColumnFilters: false,
+    enableSorting: false,
     defaultDisplayColumn: {
       enableResizing: true, //turn on some features that are usually off for all display columns
     },
     displayColumnDefOptions: {
       "mrt-row-actions": {
-        size: 210, //set custom width
-        muiTableHeadCellProps: {
-          align: "center", //change head cell props
-        },
+        size: 180, //set custom width
+        // muiTableHeadCellProps: {
+        //   align: "center", //change head cell props
+        // },
       },
-      "mrt-row-numbers": {
-        enableColumnDragging: true,
-        enableColumnOrdering: true, //turn on some features that are usually off
-        enableResizing: true,
-        muiTableHeadCellProps: {
-          sx: {
-            fontSize: "1.2rem",
-          },
-        },
-      },
+
       "mrt-row-select": {
         enableColumnActions: true,
         enableHiding: true,
-        size: 100,
+        // size: 100,
       },
     },
     enableColumnResizing: true,
     enableColumnOrdering: true,
     enableRowSelection: true,
     enableRowActions: true,
+    enableColumnResizing: false,
     positionActionsColumn: "last",
     renderRowActions: ({ row }) => (
-      <Box sx={{ display: "flex", gap: "1rem" }}>
+      <Box>
         <Tooltip title="Edit">
           <IconButton>
             <EditIcon color="primary" />
@@ -280,7 +283,16 @@ const LeadsTable = () => {
     ),
   });
 
-  return <MaterialReactTable table={table} />;
+  return (
+    <Grid style={{ width: "100% !important", overflowX: "hidden" }}>
+      <MaterialReactTable
+        table={table}
+        // sx={{
+        //   width: "60%", // Adjust as needed
+        // }}
+      />
+    </Grid>
+  );
 };
 
 export default LeadsTable;

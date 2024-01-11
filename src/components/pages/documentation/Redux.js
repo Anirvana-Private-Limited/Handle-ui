@@ -20,19 +20,19 @@ import {
 
 import { spacing } from "@mui/system";
 
-import useAppSelector from "../../../hooks/useAppSelector";
-import useAppDispatch from "../../../hooks/useAppDispatch";
+// import useAppSelector from "../../../hooks/useAppSelector";
+// import useAppDispatch from "../../../hooks/useAppDispatch";
 
 import Code from "../../Code";
 
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from "../../../redux/slices/counter";
+// import {
+//   decrement,
+//   increment,
+//   incrementByAmount,
+//   incrementAsync,
+//   incrementIfOdd,
+//   selectCount,
+// } from "../../../redux/slices/counter";
 
 const Divider = styled(MuiDivider)(spacing);
 
@@ -195,63 +195,63 @@ function ProductList() {
   );
 }
 
-function Counter() {
-  const count = useAppSelector(selectCount);
-  const dispatch = useAppDispatch();
+// function Counter() {
+//   const count = useAppSelector(selectCount);
+//   const dispatch = useAppDispatch();
 
-  return (
-    <Card>
-      <CardHeader title="Example" />
-      <CardContent>
-        <Box my={3}>
-          <Button
-            variant="outlined"
-            size="small"
-            aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
-          >
-            -
-          </Button>
-          <CounterElement>{count}</CounterElement>
-          <Button
-            variant="outlined"
-            size="small"
-            aria-label="Increment value"
-            onClick={() => dispatch(increment())}
-          >
-            +
-          </Button>
-        </Box>
-        <Box my={3}>
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => dispatch(incrementByAmount(1))}
-            mr={2}
-          >
-            Add Amount
-          </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => dispatch(incrementAsync(1))}
-            mr={2}
-          >
-            Add Async
-          </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => dispatch(incrementIfOdd(1))}
-            mr={2}
-          >
-            Add If Odd
-          </Button>
-        </Box>
-      </CardContent>
-    </Card>
-  );
-}
+//   return (
+//     <Card>
+//       <CardHeader title="Example" />
+//       <CardContent>
+//         <Box my={3}>
+//           <Button
+//             variant="outlined"
+//             size="small"
+//             aria-label="Decrement value"
+//             onClick={() => dispatch(decrement())}
+//           >
+//             -
+//           </Button>
+//           <CounterElement>{count}</CounterElement>
+//           <Button
+//             variant="outlined"
+//             size="small"
+//             aria-label="Increment value"
+//             onClick={() => dispatch(increment())}
+//           >
+//             +
+//           </Button>
+//         </Box>
+//         <Box my={3}>
+//           <Button
+//             variant="outlined"
+//             size="small"
+//             onClick={() => dispatch(incrementByAmount(1))}
+//             mr={2}
+//           >
+//             Add Amount
+//           </Button>
+//           <Button
+//             variant="outlined"
+//             size="small"
+//             onClick={() => dispatch(incrementAsync(1))}
+//             mr={2}
+//           >
+//             Add Async
+//           </Button>
+//           <Button
+//             variant="outlined"
+//             size="small"
+//             onClick={() => dispatch(incrementIfOdd(1))}
+//             mr={2}
+//           >
+//             Add If Odd
+//           </Button>
+//         </Box>
+//       </CardContent>
+//     </Card>
+//   );
+// }
 
 function RealLifeExample() {
   return (
@@ -277,7 +277,7 @@ function RealLifeExample() {
           </li>
         </ul>
       </Typography>
-      <Counter />
+      {/* <Counter /> */}
     </Box>
   );
 }
